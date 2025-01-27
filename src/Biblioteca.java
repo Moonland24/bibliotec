@@ -40,4 +40,15 @@ public class Biblioteca {
         return "Biblioteca [libros=" + Arrays.toString(libros) + ", usuarios=" + Arrays.toString(usuarios) + "]";
     }
 
+//Este método agrega un nuevo libro a un array de libros.
+    public void addLibro(Libro libro) {
+        if (contadorLibros < libros.length) {                           //Comprueba si hay espacio en el array libros comparando contadorLibros (número actual de libros) con la longitud de libros.
+            libros[contadorLibros] = libro;                             //Coloca el libro que se quiere añadir en la posición contadorLibros.
+            contadorLibros++;                                           //Suma 1 al contadorLibros para reflejar el número total de libros.
+            System.out.println("Libro añadido: " + libro.toString());   //Muestra un mensaje indicando que el libro se ha añadido.
+        } else {                                                        //Si no hay espacio
+            System.out.println("No hay espacios para mas libros");    //Muestra un mensaje indicando que no hay espacio para más libros.
+        }
+    }
+
 }
