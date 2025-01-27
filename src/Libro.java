@@ -1,4 +1,4 @@
-public class Libros {
+public class Libro {
 
 // se hacen los atributos de la clase Libros
     private String titulo;
@@ -7,7 +7,7 @@ public class Libros {
     //-- falta el atributo privado de préstamo--
 
 // se crean los constructores de la clase   
-    public Libros(String titulo, String autor, String categoria) {
+    public Libro(String titulo, String autor, String categoria) {
         this.titulo = titulo;
         this.autor = autor;
         this.categoria = categoria;
