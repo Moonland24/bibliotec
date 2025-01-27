@@ -51,4 +51,24 @@ public class Biblioteca {
         }
     }
 
+// Este método elimina un libro que ya etá cargado en la bibioteca de datos
+    public void deleteLibro(Libro libro) {                              
+        boolean encontrado = false;                                             //primero se comprueba si el libro a eliminar se encuentra o no.
+        for (int i = 0; i < contadorLibros; i++) {                              //Este bucle recorre el array libros desde la posición 0 hasta...                                                                               //...contadorLibros (que indica la cantidad de libros almacenados actualmente).
+            if (libros[i].getTitulo().equalsIgnoreCase(libro.getTitulo())) {    //Para cada posición i, compara el título del libro en esa posición (libros[i].getTitulo()) con el título del libro proporcionado (libro.getTitulo()), usando equalsIgnoreCase (que no distingue entre mayúsculas y minúsculas).
+                encontrado = true;                                              //si lo encientra, procede a borra el libro.
+                for (int j = i; j < contadorLibros - 1; j++) {                  //al encontrar el libro el proceso de eliminado se hace de tal manera que se desplaza a la izquierda y sobreescribe el libro a eliminar.
+                    libros[j] = libros[j + 1];                                  //Al mover todos los elementos posteriores hacia la izquierda, el último libro del arreglo queda "duplicado". Este valor duplicado será eliminado más adelante.
+                }
+                libros[contadorLibros - 1] = null;                              //Una vez que los elementos han sido desplazados, asigna null a la última posición válida (contadorLibros - 1), que antes contenía el duplicado.
+                contadorLibros--;                                               //Decrementa contadorLibros para reflejar que ahora hay un libro menos en el array de los libretes.
+                System.out.println("Libro eliminado: " + libro.toString());     //imprime el mensaje que confirma que se ha borrado el libro.
+                break;
+            }
+        }       
+        if (!encontrado) {                                                      //si no se encuentra el libro
+            System.out.println("Libro no encontrado: " + libro.toString());     //se muestra un mensaje como que el libro no se ha encontrado.
+        }
+
+    }
 }
