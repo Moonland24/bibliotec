@@ -71,4 +71,33 @@ public class Biblioteca {
         }
 
     }
+
+// se crea e método que permite buscar libros
+    public Libro[] buscarLibro(String caracterBusqueda, String valor) {
+        int coincidencias = 0;                                                                        //Se cuentan cuantos libros coinciden con el criterio de búsqueda, dando la primera repsada del array
+        System.out.println("Resultados de la búsqueda para " + caracterBusqueda + ": " + valor);      //imprime el criterio por el que se busca y el numero de coincidencias
+
+        for (int i = 0; i < contadorLibros; i++) {                                                                                      // se recorre nuevamente el array                                                                      
+            if ((caracterBusqueda.equalsIgnoreCase("titulo") && libros[i].getTitulo().equalsIgnoreCase(valor)) ||         // toma en cuenta la misma búsqueda para todo
+                    (caracterBusqueda.equalsIgnoreCase("categoria") && libros[i].getCategoria().equalsIgnoreCase(valor))
+                    ||
+                    (caracterBusqueda.equalsIgnoreCase("autor") && libros[i].getAutor().equalsIgnoreCase(valor))) {
+                coincidencias++;                                                                                                        // incrementa las coincidencias si las hubiera
+            }
+        }
+
+        Libro[] resultados = new Libro[coincidencias];                                                                                    // se crea un nuevo array para almacenar esas coincidencias
+        int indice = 0;                                                                                                                   // incrementa el ídice para el siguiente array de resultados
+
+        for (int i = 0; i < contadorLibros; i++) {
+            if ((caracterBusqueda.equalsIgnoreCase("titulo") && libros[i].getTitulo().equalsIgnoreCase(valor)) ||                   // vuelve a recorrer el array de libros actuales, pero esta vez se asigna a
+                    (caracterBusqueda.equalsIgnoreCase("categoria") && libros[i].getCategoria().equalsIgnoreCase(valor))
+                    ||
+                    (caracterBusqueda.equalsIgnoreCase("autor") && libros[i].getAutor().equalsIgnoreCase(valor))) {
+                resultados[indice] = libros[i];                                                                                                   // resultados el valor del libro
+                indice++;                                                                                               
+            }
+        }
+        return resultados;          // devuelve la lista de libros que se ha encontrado con el caracterBusqueda y el valor que se ha dicho
+    }
 }
