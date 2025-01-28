@@ -103,4 +103,17 @@ public class Biblioteca {
         return resultados;          // devuelve la lista de libros que se ha encontrado con el caracterBusqueda y el valor que se ha dicho
     }
 
+//se crea el método que permite mostrar libros
+    public void mostrarLibros() {                                   
+        System.out.println("Lista de libros: ");                // muestra una lista de libros
+        if(contadorLibros > 0){                                   // si el contador de libros es mayor a 0
+            for (int i = 0; i < contadorLibros; i++) {            //lo recorre
+                System.out.println(libros[i].toString());         // e imprime todos los libros que hay registrados
+            }
+        }else{                                                    // si no, lo que hace es 
+            System.out.println("No hay libros registrados.");   // mostrar un mensaje que diga que no hay libros registrados
+        }
+
+    }
+
 }
