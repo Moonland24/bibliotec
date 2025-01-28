@@ -116,4 +116,16 @@ public class Biblioteca {
 
     }
 
+//se crea el método de añadir usuarios
+    public void addUsuario(Usuario usuario) {                                 //se llama a la clase de usuario y sus características
+        if (contadorUsuarios < usuarios.length) {                             //compara la cantidad de usuarios actuales en el array con la capacidad que hay para ellos para determinar si se puede o no añadir a más usuarios
+            usuarios[contadorUsuarios] = usuario;                             //Accede a la posición actual del array donde se debe guardar el nuevo usuario y Signa el objeto usuario al array en la posición indicada por contadorUsuarios
+            contadorUsuarios++;                                               // una vez guardado, incrmeenta el contador de usuarios
+            System.out.println("Usuario añadido: " + usuario.toString());     //imprime la confirmación de que se ha añadido el usuario
+        } else {
+            System.out.println("No hay espacios para mas usuarios");        // en caso de que no haya habido espacio, lo informa
+        }
+    }
+
+
 }
