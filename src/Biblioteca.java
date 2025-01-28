@@ -100,4 +100,41 @@ public class Biblioteca {
         }
         return resultados;          // devuelve la lista de libros que se ha encontrado con el caracterBusqueda y el valor que se ha dicho
     }
+
+//se crea el método que permite mostrar libros
+    public void mostrarLibros() {                                   
+        System.out.println("Lista de libros: ");                // muestra una lista de libros
+        if(contadorLibros > 0){                                   // si el contador de libros es mayor a 0
+            for (int i = 0; i < contadorLibros; i++) {            //lo recorre
+                System.out.println(libros[i].toString());         // e imprime todos los libros que hay registrados
+            }
+        }else{                                                    // si no, lo que hace es 
+            System.out.println("No hay libros registrados.");   // mostrar un mensaje que diga que no hay libros registrados
+        }
+
+    }
+
+//se crea el método de añadir usuarios
+    public void addUsuario(Usuario usuario) {                                 //se llama a la clase de usuario y sus características
+        if (contadorUsuarios < usuarios.length) {                             //compara la cantidad de usuarios actuales en el array con la capacidad que hay para ellos para determinar si se puede o no añadir a más usuarios
+            usuarios[contadorUsuarios] = usuario;                             //Accede a la posición actual del array donde se debe guardar el nuevo usuario y Signa el objeto usuario al array en la posición indicada por contadorUsuarios
+            contadorUsuarios++;                                               // una vez guardado, incrmeenta el contador de usuarios
+            System.out.println("Usuario añadido: " + usuario.toString());     //imprime la confirmación de que se ha añadido el usuario
+        } else {
+            System.out.println("No hay espacios para mas usuarios");        // en caso de que no haya habido espacio, lo informa
+        }
+    }
+
+// se crea el método de mostrar usuario
+    public void mostrarUsuarios() {
+        System.out.println("Lista de usuarios actuales: ");         // se imprime un mensaje de lista en caso de que
+        if (contadorUsuarios > 0) {                                   //la cantidad de usuarios sea mayor a cero
+            for (int i = 0; i < contadorUsuarios; i++) {              // que para ello recorre la lista de usurios añadidos
+                System.out.println(usuarios[i].toString());           // y por lo tanto las imprime
+            }
+        } else {                                                      // en caso contrario de que no se cumpla esa cndición
+            System.out.println("No hay usuarios registrados.");     // manda un mensaje de aviso como que no los hay registrados
+        }
+    }
+
 }
