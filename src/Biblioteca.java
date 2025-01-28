@@ -127,5 +127,16 @@ public class Biblioteca {
         }
     }
 
+// se crea el método de mostrar usuario
+    public void mostrarUsuarios() {
+        System.out.println("Lista de usuarios actuales: ");         // se imprime un mensaje de lista en caso de que
+        if (contadorUsuarios > 0) {                                   //la cantidad de usuarios sea mayor a cero
+            for (int i = 0; i < contadorUsuarios; i++) {              // que para ello recorre la lista de usurios añadidos
+                System.out.println(usuarios[i].toString());           // y por lo tanto las imprime
+            }
+        } else {                                                      // en caso contrario de que no se cumpla esa cndición
+            System.out.println("No hay usuarios registrados.");     // manda un mensaje de aviso como que no los hay registrados
+        }
+    }
 
 }
