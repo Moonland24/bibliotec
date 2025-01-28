@@ -54,7 +54,7 @@ public class Biblioteca {
 // Este método elimina un libro que ya etá cargado en la bibioteca de datos
     public void deleteLibro(Libro libro) {                              
         boolean encontrado = false;                                             //primero se comprueba si el libro a eliminar se encuentra o no.
-        for (int i = 0; i < contadorLibros; i++) {                              //Este bucle recorre el array libros desde la posición 0 hasta...                                                                               //...contadorLibros (que indica la cantidad de libros almacenados actualmente).
+        for (int i = 0; i < contadorLibros; i++) {                              //Este bucle recorre el array libros desde la posición 0 hasta contadorLibros (que indica la cantidad de libros almacenados actualmente).
             if (libros[i].getTitulo().equalsIgnoreCase(libro.getTitulo())) {    //Para cada posición i, compara el título del libro en esa posición (libros[i].getTitulo()) con el título del libro proporcionado (libro.getTitulo()), usando equalsIgnoreCase (que no distingue entre mayúsculas y minúsculas).
                 encontrado = true;                                              //si lo encientra, procede a borra el libro.
                 for (int j = i; j < contadorLibros - 1; j++) {                  //al encontrar el libro el proceso de eliminado se hace de tal manera que se desplaza a la izquierda y sobreescribe el libro a eliminar.
