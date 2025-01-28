@@ -98,8 +98,6 @@ public class Biblioteca {
                 indice++;                                                                                               
             }
         }
-
-
         return resultados;          // devuelve la lista de libros que se ha encontrado con el caracterBusqueda y el valor que se ha dicho
     }
 
