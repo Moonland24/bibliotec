@@ -5,6 +5,7 @@ public class Libro {
     private String autor;
     private String categoria;
     //-- falta el atributo privado de préstamo--
+    private boolean prestado;
 
 // se crean los constructores de la clase   
     public Libro(String titulo, String autor, String categoria) {
@@ -12,6 +13,7 @@ public class Libro {
         this.autor = autor;
         this.categoria = categoria;
         //-- falta el constructor en relación al préstamo--
+        this.prestado = false;
     }
 
 // se empiezan con los getters y setter para obtener y modificar 
@@ -49,11 +51,16 @@ public class Libro {
     }
 
     // --faltan los get/set para mostrar préstamos--
-
+    public boolean isPrestado(){
+        return prestado;
+    }
+    public void setPrestado(boolean prestado){
+        this.prestado = prestado;
+    }
 // sobreescritura para el método de conversión de libros en representación textual
     @Override
     public String toString() {
-        return "Libro [titulo=" + titulo + ", autor=" + autor + ", categoria=" + categoria + "]";
+        return "Libro [titulo=" + titulo + ", autor=" + autor + ", categoria=" + categoria + ", prestado=" + prestado + "]";
     }
 
 }
