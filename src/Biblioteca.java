@@ -145,6 +145,7 @@ public Libro[] buscarLibro(String caracterBusqueda, String valor) {
             coincidencias++;                                                                                                        // incrementa las coincidencias si las hubiera
         }
     }
+    
 
     Libro[] resultados = new Libro[coincidencias];                                                                                    // se crea un nuevo array para almacenar esas coincidencias
     int indice = 0;                                                                                                                   // incrementa el ídice para el siguiente array de resultados
