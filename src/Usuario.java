@@ -7,6 +7,9 @@ public class Usuario {
     private String rol;
     private String contrasenia;
     //-- falta el atributo de los libros prestados--
+    private Libro[] librosPrestados;
+    private int contadorPrestamos;
+
 
 
     public Usuario(String id, String nombre, String apellido, String rol, String contrasenia, int capacidadLibros) {
@@ -16,6 +19,8 @@ public class Usuario {
         this.rol = rol;
         this.contrasenia = contrasenia;
         //-- falta el constructo de prestamos a un usuario junto a la cantidad de los mismos--
+        this.librosPrestados = new Libro[capacidadLibros];
+        this.contadorPrestamos = 0;
     }
 
 // se empiezan con los getters y setter para obtener y modificar 
@@ -69,10 +74,46 @@ public class Usuario {
     }
 
 //-- faltan los get/set para mostrar y modificar los libros prestados de cada usuario--
+    public Libro[] getLibrosPrestados() {
+        return librosPrestados;
+    }
+
+    public int getContadorPrestamos() {
+        return contadorPrestamos;
+    }
+
+    ///// metodo los metodos de prestamo y devolucion de libros
+    
+    // Método para agregar un nuevo préstamo de libro
+public boolean agregarPrestamo(Libro libro) {
+                                                                 
+    if (contadorPrestamos < librosPrestados.length) {           // Verifica si hay espacio disponible en el array de libros prestados
+        librosPrestados[contadorPrestamos] = libro;             // Agrega el libro en la siguiente posición disponible
+        contadorPrestamos++;                                    // Incrementa el contador de préstamos
+        return true;                                            // Devuelve "true" indicando que el préstamo se realizó con éxito
+    }
+    return false;                                               // Retorna false si no hay espacio para más préstamos
+}
+
+// Método para procesar la devolución de un libro
+public boolean devolverLibro(Libro libro) {
+    
+    for (int i = 0; i < contadorPrestamos; i++){                            // Busca el libro en el array de libros prestados
+        if (librosPrestados[i].getTitulo().equals(libro.getTitulo())) {     // Compara si el título del libro coincide con alguno prestado
+            for (int j = i; j < contadorPrestamos - 1; j++) {               // Reorganiza el array moviendo los libros una posición hacia atrás
+                librosPrestados[j] = librosPrestados[j + 1];
+            }
+            librosPrestados[contadorPrestamos - 1] = null;                  // Elimina la referencia al último libro (ahora duplicado)
+            contadorPrestamos--;                                            // Reduce el contador de préstamos
+            return true;                                                    // Retorna true indicando que la devolución fue exitosa
+        }
+    }
+    return false;                                                           // Retorna false si el libro no se encontró en los préstamos
+}
 
 // sobreescritura para el método de conversión de usuario en representación textual
     @Override
     public String toString() {
-        return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" + rol + "]";
+        return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", rol=" + rol + ", libros prestados=" + contadorPrestamos + "]";
     }
 }
