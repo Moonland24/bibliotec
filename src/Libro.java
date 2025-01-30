@@ -12,7 +12,6 @@ public class Libro {
         this.titulo = titulo;
         this.autor = autor;
         this.categoria = categoria;
-        //-- falta el constructor en relación al préstamo--
         this.prestado = false;
     }
 
@@ -50,7 +49,7 @@ public class Libro {
         this.categoria = categoria;
     }
 
-    // --faltan los get/set para mostrar préstamos--
+    // los get/set para mostrar préstamos
     public boolean isPrestado(){
         return prestado;
     }

@@ -1,6 +1,4 @@
 public class SistemaBiblioteca { 
-
-
     private Biblioteca biblioteca; // Declara una variable para almacenar la instancia de la biblioteca
     private Usuario usuarioActual; // Declara una variable para almacenar el usuario que ha iniciado sesión
 
@@ -8,9 +6,8 @@ public class SistemaBiblioteca {
         this.biblioteca = new Biblioteca(capacidadLibros, capacidadUsuarios);   // Crea una nueva biblioteca con las capacidades especificadas
         this.usuarioActual = null;                                              // Inicializa el usuario actual como null ya que nadie ha iniciado sesión
     }
+
 // Método para iniciar sesión en el sistema
-
-
     public boolean login(String id, String contrasenia) {                       
         Usuario[] usuarios = biblioteca.getUsuarios();                          // Obtiene el array de usuarios registrados
         for (Usuario usuario : usuarios) {                                      // Recorre todos los usuarios del sistema
@@ -28,14 +25,12 @@ public class SistemaBiblioteca {
     }
 
 // Método para cerrar sesión
-
     public void logout() { 
         usuarioActual = null;                                     // Elimina la referencia al usuario actual
         System.out.println("Sesión cerrada exitosamente");      // Muestra mensaje de confirmación
     }
 
 // Método para realizar diferentes operaciones en la biblioteca
-
     public void realizarOperacion(String operacion, String... parametros) { 
         if (usuarioActual == null) {                                                        // Verifica si hay un usuario con sesión iniciada
             System.out.println("Debe iniciar sesión primero");                            // Muestra mensaje si no hay sesión iniciada
@@ -45,7 +40,6 @@ public class SistemaBiblioteca {
         switch (operacion.toLowerCase()) { 
 
     // Caso para realizar préstamos
-
             case "prestamo":                                                            
                 if (parametros.length == 1) {                                               // Verifica que se proporcione un parámetro
                     if (biblioteca.prestarLibro(parametros[0], usuarioActual.getId())) {    // Intenta realizar el préstamo
@@ -57,7 +51,6 @@ public class SistemaBiblioteca {
                 break;
 
  // Caso para realizar devoluciones
-
             case "devolucion":
                 if (parametros.length == 1) {                                               // Verifica que se proporcione un parámetro
                     if (biblioteca.devolverLibro(parametros[0], usuarioActual.getId())) {   // Intenta realizar la devolución
@@ -69,7 +62,6 @@ public class SistemaBiblioteca {
                 break;
 
 // Caso para ver préstamos
-
             case "ver_prestamos": 
                 if (usuarioActual.getRol().equalsIgnoreCase("ADMIN")) {     // Verifica si el usuario es administrador
                     biblioteca.mostrarLibrosPrestados(usuarioActual.getId());             // Muestra los libros prestados
@@ -77,11 +69,10 @@ public class SistemaBiblioteca {
                     System.out.println("No tiene permisos para esta operación");        // Muestra mensaje si no tiene permisos
                 }
                 break;
+            }
         }
-    }
 
 // Método para salir del sistema
-
     public void salirSistema() { 
         if (usuarioActual != null) {                                                            // Verifica si hay un usuario con sesión iniciada
             System.out.println("Gracias por usar el sistema, " + usuarioActual.getNombre());    // Muestra mensaje de despedida

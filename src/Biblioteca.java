@@ -1,7 +1,5 @@
 import java.util.Arrays;
-
 // se crea la clase biblioteca donde se empiezan a cargar los datos iniciales así como funcionalidades
-
 //atributos de la clase biblioteca
 public class Biblioteca {
     private Libro[] libros;

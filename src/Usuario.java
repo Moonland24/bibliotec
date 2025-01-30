@@ -6,11 +6,8 @@ public class Usuario {
     private String apellido;
     private String rol;
     private String contrasenia;
-    //-- falta el atributo de los libros prestados--
     private Libro[] librosPrestados;
     private int contadorPrestamos;
-
-
 
     public Usuario(String id, String nombre, String apellido, String rol, String contrasenia, int capacidadLibros) {
         this.id = id;
@@ -18,7 +15,6 @@ public class Usuario {
         this.apellido = apellido;
         this.rol = rol;
         this.contrasenia = contrasenia;
-        //-- falta el constructo de prestamos a un usuario junto a la cantidad de los mismos--
         this.librosPrestados = new Libro[capacidadLibros];
         this.contadorPrestamos = 0;
     }
@@ -73,7 +69,6 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-//-- faltan los get/set para mostrar y modificar los libros prestados de cada usuario--
     public Libro[] getLibrosPrestados() {
         return librosPrestados;
     }
@@ -82,7 +77,7 @@ public class Usuario {
         return contadorPrestamos;
     }
 
-    ///// metodo los metodos de prestamo y devolucion de libros
+    // metodo los metodos de prestamo y devolucion de libros
     
     // Método para agregar un nuevo préstamo de libro
 public boolean agregarPrestamo(Libro libro) {
