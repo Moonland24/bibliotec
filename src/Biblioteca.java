@@ -71,6 +71,15 @@ public class Biblioteca {
         }
 
     }
+    private Libro buscarLibro(String titulo) {
+
+        for (int i = 0; i < contadorLibros; i++) {                                      // Recorre el array de libros hasta el contador actual
+            if (libros[i].getTitulo().equalsIgnoreCase(titulo)) {                       // Si encuentra el título, devuelve el libro
+                return libros[i];
+            }
+        }
+        return null;                                                                    // Si no encuentra el libro, retorna null
+    }
         
 // Método para prestar un libro a un usuario
 public boolean prestarLibro(String tituloLibro, String idUsuario) {
@@ -87,16 +96,18 @@ public boolean prestarLibro(String tituloLibro, String idUsuario) {
 // Método para devolver un libro prestado
 public boolean devolverLibro(String tituloLibro, String idUsuario) {
     Libro libro = buscarLibro(tituloLibro);                             // Busca el libro por título en el sistema
-    Usuario usuario = buscarUsuario(idUsuario);                         // Busca el usuario por ID en el sistema
-    
-    if (libro != null && usuario != null && libro.isPrestado()) {       // Verifica que exista el libro, el usuario y que el libro esté prestado
-        libro.setPrestado(false);                              // Marca el libro como no prestado
-        return usuario.devolverLibro(libro);                            // Registra la devolución en el usuario y retorna el resultado
+        Usuario usuario = buscarUsuario(idUsuario);                         // Busca el usuario por ID en el sistema
+        
+        if (libro != null && usuario != null && libro.isPrestado()) {       // Verifica que exista el libro, el usuario y que el libro esté prestado
+            libro.setPrestado(false);                              // Marca el libro como no prestado
+            return usuario.devolverLibro(libro);                            // Registra la devolución en el usuario y retorna el resultado
+        }
+        return false;                                                       // Si no se cumple alguna condición, retorna falso
     }
-    return false;                                                       // Si no se cumple alguna condición, retorna falso
-}
-
-// Método para mostrar todos los libros prestados (solo para administradores)
+    
+    
+    
+    // Método para mostrar todos los libros prestados (solo para administradores)
 public void mostrarLibrosPrestados(String idUsuario) {
 
     Usuario usuario = buscarUsuario(idUsuario);                                             // Busca el usuario por ID en el sistema
@@ -109,16 +120,7 @@ public void mostrarLibrosPrestados(String idUsuario) {
     }
 }
 
-// Método privado para buscar un libro por título
-private Libro buscarLibro(String titulo) {
 
-    for (int i = 0; i < contadorLibros; i++) {                                      // Recorre el array de libros hasta el contador actual
-        if (libros[i].getTitulo().equalsIgnoreCase(titulo)) {                       // Si encuentra el título, devuelve el libro
-            return libros[i];
-        }
-    }
-    return null;                                                                    // Si no encuentra el libro, retorna null
-}
 
 // Método privado para buscar un usuario por ID
 private Usuario buscarUsuario(String id) {                                          
@@ -129,6 +131,74 @@ private Usuario buscarUsuario(String id) {
     }
     return null;                                                                    // Si no encuentra el usuario, retorna null
 }
+
+// se crea e método que permite buscar libros
+public Libro[] buscarLibro(String caracterBusqueda, String valor) {
+    int coincidencias = 0;                                                                        //Se cuentan cuantos libros coinciden con el criterio de búsqueda, dando la primera repsada del array
+    System.out.println("Resultados de la búsqueda para " + caracterBusqueda + ": " + valor);      //imprime el criterio por el que se busca y el numero de coincidencias
+
+    for (int i = 0; i < contadorLibros; i++) {                                                                                      // se recorre nuevamente el array                                                                      
+        if ((caracterBusqueda.equalsIgnoreCase("titulo") && libros[i].getTitulo().equalsIgnoreCase(valor)) ||         // toma en cuenta la misma búsqueda para todo
+                (caracterBusqueda.equalsIgnoreCase("categoria") && libros[i].getCategoria().equalsIgnoreCase(valor))
+                ||
+                (caracterBusqueda.equalsIgnoreCase("autor") && libros[i].getAutor().equalsIgnoreCase(valor))) {
+            coincidencias++;                                                                                                        // incrementa las coincidencias si las hubiera
+        }
+    }
+
+    Libro[] resultados = new Libro[coincidencias];                                                                                    // se crea un nuevo array para almacenar esas coincidencias
+    int indice = 0;                                                                                                                   // incrementa el ídice para el siguiente array de resultados
+
+    for (int i = 0; i < contadorLibros; i++) {
+        if ((caracterBusqueda.equalsIgnoreCase("titulo") && libros[i].getTitulo().equalsIgnoreCase(valor)) ||                   // vuelve a recorrer el array de libros actuales, pero esta vez se asigna a
+                (caracterBusqueda.equalsIgnoreCase("categoria") && libros[i].getCategoria().equalsIgnoreCase(valor))
+                ||
+                (caracterBusqueda.equalsIgnoreCase("autor") && libros[i].getAutor().equalsIgnoreCase(valor))) {
+            resultados[indice] = libros[i];                                                                                                   // resultados el valor del libro
+            indice++;                                                                                               
+        }
+    }
+
+
+    return resultados;          // devuelve la lista de libros que se ha encontrado con el caracterBusqueda y el valor que se ha dicho
+}
+
+//se crea el método que permite mostrar libros
+public void mostrarLibros() {                                   
+    System.out.println("Lista de libros: ");                // muestra una lista de libros
+    if(contadorLibros > 0){                                   // si el contador de libros es mayor a 0
+        for (int i = 0; i < contadorLibros; i++) {            //lo recorre
+            System.out.println(libros[i].toString());         // e imprime todos los libros que hay registrados
+        }
+    }else{                                                    // si no, lo que hace es 
+        System.out.println("No hay libros registrados.");   // mostrar un mensaje que diga que no hay libros registrados
+    }
+
+}
+
+//se crea el método de añadir usuarios
+public void addUsuario(Usuario usuario) {                                 //se llama a la clase de usuario y sus características
+    if (contadorUsuarios < usuarios.length) {                             //compara la cantidad de usuarios actuales en el array con la capacidad que hay para ellos para determinar si se puede o no añadir a más usuarios
+        usuarios[contadorUsuarios] = usuario;                             //Accede a la posición actual del array donde se debe guardar el nuevo usuario y Signa el objeto usuario al array en la posición indicada por contadorUsuarios
+        contadorUsuarios++;                                               // una vez guardado, incrmeenta el contador de usuarios
+        System.out.println("Usuario añadido: " + usuario.toString());     //imprime la confirmación de que se ha añadido el usuario
+    } else {
+        System.out.println("No hay espacios para mas usuarios");        // en caso de que no haya habido espacio, lo informa
+    }
+}
+
+// se crea el método de mostrar usuario
+public void mostrarUsuarios() {
+    System.out.println("Lista de usuarios actuales: ");         // se imprime un mensaje de lista en caso de que
+    if (contadorUsuarios > 0) {                                   //la cantidad de usuarios sea mayor a cero
+        for (int i = 0; i < contadorUsuarios; i++) {              // que para ello recorre la lista de usurios añadidos
+            System.out.println(usuarios[i].toString());           // y por lo tanto las imprime
+        }
+    } else {                                                      // en caso contrario de que no se cumpla esa cndición
+        System.out.println("No hay usuarios registrados.");     // manda un mensaje de aviso como que no los hay registrados
+    }
+}
+
 
 }
 
