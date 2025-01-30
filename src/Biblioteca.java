@@ -71,4 +71,64 @@ public class Biblioteca {
         }
 
     }
+        
+// Método para prestar un libro a un usuario
+public boolean prestarLibro(String tituloLibro, String idUsuario) {
+    Libro libro = buscarLibro(tituloLibro);                                // Busca el libro por título en el sistema
+    Usuario usuario = buscarUsuario(idUsuario);                            // Busca el usuario por ID en el sistema
+    
+    if (libro != null && usuario != null && !libro.isPrestado()) {         // Verifica que exista el libro, el usuario y que el libro no esté prestado
+        libro.setPrestado(true);                                  // Marca el libro como prestado
+        return usuario.agregarPrestamo(libro);                             // Agrega el préstamo al usuario y retorna el resultado
+    }
+    return false;                                                          // Si no se cumple alguna condición, retorna falso
 }
+
+// Método para devolver un libro prestado
+public boolean devolverLibro(String tituloLibro, String idUsuario) {
+    Libro libro = buscarLibro(tituloLibro);                             // Busca el libro por título en el sistema
+    Usuario usuario = buscarUsuario(idUsuario);                         // Busca el usuario por ID en el sistema
+    
+    if (libro != null && usuario != null && libro.isPrestado()) {       // Verifica que exista el libro, el usuario y que el libro esté prestado
+        libro.setPrestado(false);                              // Marca el libro como no prestado
+        return usuario.devolverLibro(libro);                            // Registra la devolución en el usuario y retorna el resultado
+    }
+    return false;                                                       // Si no se cumple alguna condición, retorna falso
+}
+
+// Método para mostrar todos los libros prestados (solo para administradores)
+public void mostrarLibrosPrestados(String idUsuario) {
+
+    Usuario usuario = buscarUsuario(idUsuario);                                             // Busca el usuario por ID en el sistema
+    if (usuario != null && usuario.getRol().equalsIgnoreCase("ADMIN")) {      // Verifica que el usuario exista y sea administrador
+        for (Libro libro : libros) {                                                        // Recorre el array de libros
+            if (libro != null && libro.isPrestado()) {                                      // Si el libro existe y está prestado, lo muestra
+                System.out.println(libro.toString());
+            }
+        }
+    }
+}
+
+// Método privado para buscar un libro por título
+private Libro buscarLibro(String titulo) {
+
+    for (int i = 0; i < contadorLibros; i++) {                                      // Recorre el array de libros hasta el contador actual
+        if (libros[i].getTitulo().equalsIgnoreCase(titulo)) {                       // Si encuentra el título, devuelve el libro
+            return libros[i];
+        }
+    }
+    return null;                                                                    // Si no encuentra el libro, retorna null
+}
+
+// Método privado para buscar un usuario por ID
+private Usuario buscarUsuario(String id) {                                          
+    for (int i = 0; i < contadorUsuarios; i++) {                                    // Recorre el array de usuarios hasta el contador actual
+        if (usuarios[i].getId().equals(id)) {                                       // Si encuentra el ID exacto, retorna el usuario
+            return usuarios[i];
+        }
+    }
+    return null;                                                                    // Si no encuentra el usuario, retorna null
+}
+
+}
+
