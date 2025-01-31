@@ -4,8 +4,8 @@ public class Libro {
     private String titulo;
     private String autor;
     private String categoria;
-    //-- falta el atributo privado de préstamo--
     private boolean prestado;
+    private int vecesPrestado;
 
 // se crean los constructores de la clase   
     public Libro(String titulo, String autor, String categoria) {
@@ -13,12 +13,10 @@ public class Libro {
         this.autor = autor;
         this.categoria = categoria;
         this.prestado = false;
+        this.vecesPrestado = 0;
     }
 
-// se empiezan con los getters y setter para obtener y modificar 
-// los ateibutos del titulo
-
-// se devuelve el valor de titulo
+// se empiezan con los getters y setter para obtener y modificar los atributos del título se devuelve el valor del título
     public String getTitulo() {
         return titulo;
     }
@@ -28,8 +26,7 @@ public class Libro {
         this.titulo = titulo;
     }
 
-// se empiezan con los getters y setter para obtener y modificar 
-// los atributos del autor
+// se empiezan con los getters y setter para obtener y modificar los atributos del autor
     public String getAutor() {
         return autor;
     }
@@ -38,9 +35,7 @@ public class Libro {
         this.autor = autor;
     }
 
-
-// se empiezan con los getters y setter para obtener y modificar 
-// los atributos de las categorias
+// se empiezan con los getters y setter para obtener y modificar los atributos de las categorías
     public String getCategoria() {
         return categoria;
     }
@@ -53,13 +48,23 @@ public class Libro {
     public boolean isPrestado(){
         return prestado;
     }
+
     public void setPrestado(boolean prestado){
         this.prestado = prestado;
     }
-// sobreescritura para el método de conversión de libros en representación textual
-    @Override
-    public String toString() {
-        return "Libro [titulo=" + titulo + ", autor=" + autor + ", categoria=" + categoria + ", prestado=" + prestado + "]";
+
+    // los get/set para contar las veces que ha sido prestado
+    public int getVecesPrestado() {
+        return vecesPrestado;
     }
 
+    public void setVecesPrestado(int vecesPrestado) {
+        this.vecesPrestado = vecesPrestado;
+    }
+
+    // sobreescritura para el método de conversión de libros en representación textual
+    @Override
+    public String toString() {
+        return "Libro [titulo=" + titulo + ", autor=" + autor + ", categoria=" + categoria + ", prestado=" + prestado + ", Veces prestado=" + vecesPrestado + "]";
+    }
 }
