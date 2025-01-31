@@ -6,11 +6,8 @@ public class Usuario {
     private String apellido;
     private String rol;
     private String contrasenia;
-    //-- falta el atributo de los libros prestados--
     private Libro[] librosPrestados;
     private int contadorPrestamos;
-
-
 
     public Usuario(String id, String nombre, String apellido, String rol, String contrasenia, int capacidadLibros) {
         this.id = id;
@@ -18,13 +15,11 @@ public class Usuario {
         this.apellido = apellido;
         this.rol = rol;
         this.contrasenia = contrasenia;
-        //-- falta el constructo de prestamos a un usuario junto a la cantidad de los mismos--
         this.librosPrestados = new Libro[capacidadLibros];
         this.contadorPrestamos = 0;
     }
 
-// se empiezan con los getters y setter para obtener y modificar 
-// los atributos del id del usuario
+// se empiezan con los getters y setter para obtener y modificar los atributos del id de usuario
     public String getId() {
         return id;
     }
@@ -33,8 +28,7 @@ public class Usuario {
         this.id = id;
     }
 
-// se empiezan con los getters y setter para obtener y modificar 
-// los atributos del nombre del usuario
+// se empiezan con los getters y setter para obtener y modificar  los tributo del nombre de usuario
     public String getNombre() {
         return nombre;
     }
@@ -43,8 +37,7 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-// se empiezan con los getters y setter para obtener y modificar 
-// los atributos del apellido del usuario
+// se empiezan con los getters y setter para obtener y modificar los atributos del apellido del uss
     public String getApellido() {
         return apellido;
     }
@@ -53,8 +46,7 @@ public class Usuario {
         this.apellido = apellido;
     }
 
- // se empiezan con los getters y setter para obtener y modificar 
-// los atributos del rol del usuario )si es adminitrador o usuario comun)
+ // se empiezan con los getters y setter para obtener y modificar  los atributos de rol del uss o adm
     public String getRol() {
         return rol;
     }
@@ -63,8 +55,7 @@ public class Usuario {
         this.rol = rol;
     }
 
-// se empiezan con los getters y setter para obtener y modificar 
-// los atributos de la contraseña del usuario
+// se empiezan con los getters y setter para obtener y modificar los ateibutos de contraseña 
     public String getContrasenia() {
         return contrasenia;
     }
@@ -73,43 +64,38 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-//-- faltan los get/set para mostrar y modificar los libros prestados de cada usuario--
-    public Libro[] getLibrosPrestados() {
-        return librosPrestados;
-    }
-
     public int getContadorPrestamos() {
         return contadorPrestamos;
     }
 
-    ///// metodo los metodos de prestamo y devolucion de libros
-    
-    // Método para agregar un nuevo préstamo de libro
-public boolean agregarPrestamo(Libro libro) {
-                                                                 
-    if (contadorPrestamos < librosPrestados.length) {           // Verifica si hay espacio disponible en el array de libros prestados
-        librosPrestados[contadorPrestamos] = libro;             // Agrega el libro en la siguiente posición disponible
-        contadorPrestamos++;                                    // Incrementa el contador de préstamos
-        return true;                                            // Devuelve "true" indicando que el préstamo se realizó con éxito
+    public void setContadorPrestamos(int contadorPrestamos){
+        this.contadorPrestamos = contadorPrestamos;
     }
-    return false;                                               // Retorna false si no hay espacio para más préstamos
-}
 
-// Método para procesar la devolución de un libro
-public boolean devolverLibro(Libro libro) {
-    
-    for (int i = 0; i < contadorPrestamos; i++){                            // Busca el libro en el array de libros prestados
-        if (librosPrestados[i].getTitulo().equals(libro.getTitulo())) {     // Compara si el título del libro coincide con alguno prestado
-            for (int j = i; j < contadorPrestamos - 1; j++) {               // Reorganiza el array moviendo los libros una posición hacia atrás
-                librosPrestados[j] = librosPrestados[j + 1];
+    // Método para agregar un nuevo préstamo de libro
+    public boolean agregarPrestamo(Libro libro) {
+                                                                 
+        if (contadorPrestamos < librosPrestados.length) {           // Verifica si hay espacio disponible en el array de libros prestados
+            librosPrestados[contadorPrestamos] = libro;             // Agrega el libro en la siguiente posición disponible
+            contadorPrestamos++;                                    // Incrementa el contador de préstamos
+            return true;                                            // Devuelve "true" indicando que el préstamo se realizó con éxito
+        }
+        return false;                                               // Retorna false si no hay espacio para más préstamos
+    }
+
+    public void eliminarPrestamo(Libro libro) {
+        for (int i = 0; i < contadorPrestamos; i++) {
+            if (librosPrestados[i].getTitulo().equals(libro.getTitulo())) {
+            librosPrestados[i] = null;
+            contadorPrestamos--;
+            break;
             }
-            librosPrestados[contadorPrestamos - 1] = null;                  // Elimina la referencia al último libro (ahora duplicado)
-            contadorPrestamos--;                                            // Reduce el contador de préstamos
-            return true;                                                    // Retorna true indicando que la devolución fue exitosa
         }
     }
-    return false;                                                           // Retorna false si el libro no se encontró en los préstamos
-}
+
+    public Libro[] getLibrosPrestados() {
+        return librosPrestados;
+    }
 
 // sobreescritura para el método de conversión de usuario en representación textual
     @Override
